@@ -5,6 +5,8 @@
 //  Created by Alex Nagy on 01.03.2026.
 //
 
+import Foundation
+
 public struct Stack<Element> {
     
     private var storage: [Element] = []
@@ -45,7 +47,15 @@ public struct Stack<Element> {
     }
 }
 
-extension Stack: CustomDebugStringConvertible {
+extension Stack: CustomStringConvertible, CustomDebugStringConvertible {
+    public var description: String {
+        """
+        ---top---
+        \(storage.map { "\($0)" }.reversed().joined(separator: "\n"))
+        ---------
+        """
+    }
+    
     public var debugDescription: String {
         """
         ---top---
