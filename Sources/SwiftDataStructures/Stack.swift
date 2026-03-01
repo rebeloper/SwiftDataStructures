@@ -10,7 +10,7 @@ public struct Stack<Element> {
     private var storage: [Element] = []
     
     public var isEmpty: Bool {
-        peek() == nil
+        storage.isEmpty
     }
     
     public var count: Int {
