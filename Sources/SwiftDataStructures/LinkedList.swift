@@ -180,8 +180,15 @@ public struct LinkedList<Value> {
     }
 }
 
-extension LinkedList: CustomStringConvertible {
+extension LinkedList: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
+        guard let head else {
+            return "Empty list"
+        }
+        return String(describing: head)
+    }
+    
+    public var debugDescription: String {
         guard let head else {
             return "Empty list"
         }
