@@ -61,10 +61,10 @@ public struct LinkedList<Value> {
         return head!
     }
     
-    public mutating func append(_ value: Value) {
+    @discardableResult
+    public mutating func append(_ value: Value) -> LinkedListNode<Value> {
         guard !isEmpty else {
-            push(value)
-            return
+            return push(value)
         }
         
         defer {
@@ -73,6 +73,7 @@ public struct LinkedList<Value> {
         
         tail!.next = LinkedListNode(value: value)
         tail = tail!.next
+        return tail!
     }
     
     public func node(at index: Int) -> LinkedListNode<Value>? {
