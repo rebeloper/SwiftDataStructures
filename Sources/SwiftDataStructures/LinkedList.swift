@@ -8,7 +8,6 @@
 import Foundation
 
 public final class LinkedListNode<Value> {
-    
     public var value: Value
     public var next: LinkedListNode?
     
@@ -54,18 +53,19 @@ public struct LinkedList<Value> {
         defer {
             count += 1
         }
+        
         head = LinkedListNode(value: value, next: head)
+        
         if tail == nil {
             tail = head
         }
+        
         return head!
     }
     
     @discardableResult
     public mutating func append(_ value: Value) -> LinkedListNode<Value> {
-        guard !isEmpty else {
-            return push(value)
-        }
+        guard !isEmpty else { return push(value) }
         
         defer {
             count += 1
@@ -92,10 +92,7 @@ public struct LinkedList<Value> {
     
     @discardableResult
     public mutating func insert(_ value: Value, after node: LinkedListNode<Value>) -> LinkedListNode<Value> {
-        guard tail !== node else {
-            append(value)
-            return tail!
-        }
+        guard tail !== node else { return append(value) }
         
         defer {
             count += 1
@@ -109,10 +106,8 @@ public struct LinkedList<Value> {
     public mutating func insert(_ value: Value, at index: Int) -> LinkedListNode<Value>? {
         guard index >= 0 && index <= count else { return nil }
         guard index != 0 else { return push(value) }
-        guard index != count else {
-            append(value)
-            return tail
-        }
+        guard index != count else { return append(value) }
+        
         guard let prev = node(at: index - 1) else { return nil }
         return insert(value, after: prev)
     }
@@ -124,9 +119,7 @@ public struct LinkedList<Value> {
         defer {
             head = currentHead.next
             count -= 1
-            if head == nil {
-                tail = nil
-            }
+            if head == nil { tail = nil }
         }
         
         return currentHead.value
@@ -173,9 +166,8 @@ public struct LinkedList<Value> {
     public mutating func remove(at index: Int) -> Value? {
         guard index >= 0 && index < count else { return nil }
         guard index != 0 else { return pop() }
-        guard index != count - 1 else {
-            return removeLast()
-        }
+        guard index != count - 1 else { return removeLast() }
+        
         guard let prev = node(at: index - 1) else { return nil }
         return remove(after: prev)
     }
